@@ -2,6 +2,15 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+axios.get('https://api.github.com/users/danielcruz1')
+
+.then((results) => {
+  console.log(results);  
+})
+
+.catch((err) => {
+  console.log(err);
+})
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -13,6 +22,12 @@
 /* Step 4: Pass the data received from Github into your function, 
            create a new component and add it to the DOM as a child of .cards
 */
+
+
+
+
+
+
 
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
@@ -45,6 +60,46 @@ const followersArray = [];
 </div>
 
 */
+
+function gitCard(data) {
+  console.log(data);
+
+  const div1 = document.createElement('div');  // class: card
+  div1.classList.add('card');
+
+  const img = document.createElement('img');        // image
+  img.setAttribute('src', 'https://avatars2.githubusercontent.com/u/52811884?v=4')
+
+  const div2 = document.createElement('div');   // class: card-info
+  div2.classList.add('card-info');
+
+  const h3 = document.createElement('h3');          //class: name
+  h3.classList.add('name');
+
+  const p1 = document.createElement('p');       // profile
+  p1.classList.add('username');
+  p1.textContent = data.data.login;
+
+  const p2 = document.createElement('p');
+  p2.textContent = data.data.location;
+
+  const a1 = document.createElement('a');       // github url
+  a1.setAttribute('href', data.data.url);
+  a1.textContent = data.data.url;
+
+  const p3 = document.createElement('p');      // follwers
+
+
+  const p4 = document.createElement('p');       // following
+  const p5 = document.createElement('p');       // user dio
+  const p6 = document.createElement('p'); 
+  
+
+
+  console.log (div1);
+
+}
+
 
 /* List of LS Instructors Github username's: 
   tetondan
