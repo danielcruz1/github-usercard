@@ -6,6 +6,7 @@ axios.get('https://api.github.com/users/danielcruz1')
 
 .then((results) => {
   console.log(results);  
+  return gitCard(results);
 })
 
 .catch((err) => {
@@ -23,9 +24,69 @@ axios.get('https://api.github.com/users/danielcruz1')
            create a new component and add it to the DOM as a child of .cards
 */
 
+//  Elements & Style
 
+function gitCard(data) {
+  console.log(data);
 
+  const div1 = document.createElement('div');  // class: card
+  div1.classList.add('card');
 
+  const img = document.createElement('img');        // image
+  img.setAttribute('src', data.data.avatar_url)
+
+  const div2 = document.createElement('div');   // class: card-info
+  div2.classList.add('card-info');
+
+  const h3 = document.createElement('h3');          //class: name
+  h3.classList.add('name');
+  h3.textContent = data.data.name;
+
+  const p1 = document.createElement('p');       // p
+  p1.classList.add('username');
+  p1.textContent = data.data.login;
+
+  const p2 = document.createElement('p');
+  p2.textContent = 'Location: ' + data.data.location;
+
+  const a1 = document.createElement('a');       // github url
+  a1.setAttribute('href', data.data.html_url);
+  a1.textContent = data.data.blog;
+
+  const p3 = document.createElement('p');      // 
+  // p3.appendChild(a1);
+  
+  const p4 = document.createElement('p');       // followers
+  p4.textContent = 'Followers: ' + data.data.followers;
+
+  const p5 = document.createElement('p');       // following
+  p5.textContent = 'Following: ' + data.data.following;
+
+  const p6 = document.createElement('p'); 
+  p6.textContent = 'Bio: ' + data.data.bio;
+  
+
+  console.log (div1);
+
+//  Structure
+
+const structureCard = document.querySelector('.cards');
+
+structureCard.appendChild(div1);
+div1.appendChild(img);
+div1.appendChild(div2);
+div2.appendChild(h3);
+div2.appendChild(p1);
+div2.appendChild(p2);
+div2.appendChild(p3);
+p3.appendChild(a1);
+div2.appendChild(p4);
+div2.appendChild(p5);
+div2.appendChild(p6);
+
+return structureCard;
+
+}
 
 
 
@@ -39,7 +100,7 @@ axios.get('https://api.github.com/users/danielcruz1')
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['jay-maas', 'tetondan','dustinmyers', 'justsml', 'luishrd', 'bigknell'];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -60,45 +121,6 @@ const followersArray = [];
 </div>
 
 */
-
-function gitCard(data) {
-  console.log(data);
-
-  const div1 = document.createElement('div');  // class: card
-  div1.classList.add('card');
-
-  const img = document.createElement('img');        // image
-  img.setAttribute('src', 'https://avatars2.githubusercontent.com/u/52811884?v=4')
-
-  const div2 = document.createElement('div');   // class: card-info
-  div2.classList.add('card-info');
-
-  const h3 = document.createElement('h3');          //class: name
-  h3.classList.add('name');
-
-  const p1 = document.createElement('p');       // profile
-  p1.classList.add('username');
-  p1.textContent = data.data.login;
-
-  const p2 = document.createElement('p');
-  p2.textContent = data.data.location;
-
-  const a1 = document.createElement('a');       // github url
-  a1.setAttribute('href', data.data.url);
-  a1.textContent = data.data.url;
-
-  const p3 = document.createElement('p');      // follwers
-
-
-  const p4 = document.createElement('p');       // following
-  const p5 = document.createElement('p');       // user dio
-  const p6 = document.createElement('p'); 
-  
-
-
-  console.log (div1);
-
-}
 
 
 /* List of LS Instructors Github username's: 
