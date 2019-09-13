@@ -9,9 +9,8 @@ axios.get('https://api.github.com/users/danielcruz1')
   return gitCard(results);
 })
 
-.catch((err) => {
-  console.log(err);
-})
+.catch(error => console.log(error))
+
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -25,8 +24,6 @@ axios.get('https://api.github.com/users/danielcruz1')
 */
 
 
-
-
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
           , manually find some other users' github handles, or use the list found 
@@ -37,23 +34,16 @@ axios.get('https://api.github.com/users/danielcruz1')
           user, and adding that card to the DOM.
 */
 
-// const followersArray = ['jay-maas', 'tetondan','dustinmyers', 'justsml', 'luishrd', 'bigknell'];
+const followersArray = ['jay-maas', 'tetondan','dustinmyers', 'justsml', 'luishrd', 'bigknell'];
 
-// followersArray.forEach(follower => {
-//   const newFollowers = newFollowers.concat('https://api.github.com/users/' + follower)
-// });
-
-//   console.log(newFollowers);
-
-// axios.get(newFollowers)
-// .then( (response) => { 
-//   return gitCards(response);
-//  })
-//  .catch( err => {
-//     console.log(err);
-//  })
-
-
+  followersArray.forEach(follower => 
+    axios.get(`https://api.github.com/users/${follower}`)
+    
+      .then(((results) => {
+        gitCard(results);
+      }))
+      .catch(error => console.log(error))
+  );
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -93,19 +83,19 @@ function gitCard(data) {
   h3.classList.add('name');
   h3.textContent = data.data.name;
 
-  const p1 = document.createElement('p');       // p
+  const p1 = document.createElement('p');       // class: username
   p1.classList.add('username');
   p1.textContent = data.data.login;
 
   const p2 = document.createElement('p');
   p2.textContent = 'Location: ' + data.data.location;
 
-  const a1 = document.createElement('a');       // github url
-  a1.setAttribute('href', data.data.html_url);
-  a1.textContent = data.data.blog;
-
-  const p3 = document.createElement('p');      // 
-  // p3.appendChild(a1);
+  const p3 = document.createElement('p');      // profile
+  p3.textContent = 'Profile: ';
+  p3.insertAdjacentHTML(
+    "beforeend",
+    `<a href=${data.data.html_url}>${data.data.html_url}</a>`
+  );
   
   const p4 = document.createElement('p');       // followers
   p4.textContent = 'Followers: ' + data.data.followers;
@@ -130,7 +120,6 @@ div2.appendChild(h3);
 div2.appendChild(p1);
 div2.appendChild(p2);
 div2.appendChild(p3);
-p3.appendChild(a1);
 div2.appendChild(p4);
 div2.appendChild(p5);
 div2.appendChild(p6);
@@ -140,7 +129,6 @@ return structureCard;
 }
 
 
-
 /* List of LS Instructors Github username's: 
   tetondan
   dustinmyers
@@ -148,3 +136,4 @@ return structureCard;
   luishrd
   bigknell
 */
+
