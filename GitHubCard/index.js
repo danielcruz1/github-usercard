@@ -34,14 +34,14 @@ axios.get('https://api.github.com/users/danielcruz1')
           user, and adding that card to the DOM.
 */
 
-const followersArray = ['jay-maas', 'tetondan','dustinmyers', 'justsml', 'luishrd', 'bigknell'];
+const followersArray = ['jay-maas', 'shafi2019','angie0488', 'pedroescobedob', 'bigknell'];
 
   followersArray.forEach(follower => 
     axios.get(`https://api.github.com/users/${follower}`)
     
-      .then(((results) => {
+      .then((results) => {
         gitCard(results);
-      }))
+      })
       .catch(error => console.log(error))
   );
 
